@@ -24,5 +24,6 @@ public final class Main {
         b0.buildPocket();
         System.out.println(b0);
         System.out.println(b0.getPocket());
+        System.out.println("Salut");
     }
 }
