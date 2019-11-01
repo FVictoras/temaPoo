@@ -8,6 +8,9 @@ public abstract class Player {
     private boolean isSheriff;
     private ArrayList<Integer> pocket = new ArrayList<Integer>(8);
 
+    public Player() {
+    }
+
     public Player(ArrayList<Integer> arr) {
         this.setCardsId(arr);
         this.setScore(80);
@@ -53,4 +56,10 @@ public abstract class Player {
     public void setPocket(ArrayList<Integer> pocket) {
         this.pocket = pocket;
     }
+
+    public void startSheriff(ArrayList<Integer> a) {
+        System.out.println("player");
+    }
+
+    public abstract void buildPocket();
 }
