@@ -16,6 +16,12 @@ public class BasicPlayer extends Player {
                 " aur";
     }
 
+    @Override
+    public void takeCards(ArrayList<Integer> a) {
+        this.cards = a;
+    }
+
+
     public void buildPocket() {
         this.setPocket(BasicPlayerUtils.basicPocket(cards));
     }
