@@ -39,12 +39,14 @@ public final class Main {
 //        System.out.println(b1.getPocket());
 
         /////////////////////////////////////////////////////
-        ArrayList<Integer> c = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 3, 9, 9, 21, 22, 23, 24, 4, 5, 22, 23, 24, 21));
-        ArrayList<String> s = new ArrayList<String>(Arrays.asList("basic", "basic"));
+        ArrayList<Integer> c = new ArrayList<Integer>(Arrays.asList(3,2,2,8,0,7,8,9,0,2,8,2,2,9,9,4,4,8,6,8,3,9,2,5,5,7,5,9,7,8,0,2,2,5,5,6,1,4,5,9,6,2,4,0,1,2,7,4,9,0,7,6,6,8,1,5,6,9,7,2,3,8,3,2,3,2,8,1,3,3,5,7,3,3,1,5,0,2,1,1,9,9,7,6,6,8,2,2,9,9,7,9,3,3,3,2,9,7,1,4,0,2,0,3,7,9,5,1,5,4,6,0,6,1,8,1,5,0,1,3));
+        ArrayList<String> s = new ArrayList<String>(Arrays.asList("basic", "basic", "basic"));
         System.out.println(s);
         Round joc = new Round(2, 1, c, s);
-        System.out.println(joc.players);
+     //   System.out.println(joc.players);
         joc.Game();
-        System.out.println(joc.players);
+        System.out.println(joc.players.get(0));
+        System.out.println(joc.players.get(1));
+        System.out.println(joc.players.get(2));
     }
 }

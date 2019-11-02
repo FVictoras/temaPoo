@@ -57,9 +57,13 @@ public abstract class Player {
         this.pocket = pocket;
     }
 
-    public void startSheriff(ArrayList<Integer> a) {
+    public void startSheriff(ArrayList<Integer> a, Player b) {
         System.out.println("player");
     }
+
+    public abstract ArrayList<Integer> getTaraba();
+
+    public abstract void addTaraba(ArrayList<Integer> a);
 
     public abstract void buildPocket();
 }

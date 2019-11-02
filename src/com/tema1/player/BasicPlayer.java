@@ -7,6 +7,7 @@ public class BasicPlayer extends Player {
     private ArrayList<Integer> cards;
     private int playerID;
     private int totalCost = 0;
+    private ArrayList<Integer> taraba = new ArrayList<Integer>();
 
     public BasicPlayer() {
     }
@@ -19,8 +20,7 @@ public class BasicPlayer extends Player {
 
     @Override
     public String toString() {
-        return "Basic Player are cartile: " + this.getCardsId() + " si este " + isSheriff() + " si are " + getScore() +
-                " aur";
+        return "cartile: " + getCardsId() + " taraba:" + getTaraba() + " aur:" + getScore();
     }
 
     @Override
@@ -59,11 +59,23 @@ public class BasicPlayer extends Player {
         }
     }
 
-    public void startSheriff(ArrayList<Integer> a) {
+    public void startSheriff(ArrayList<Integer> a, Player b) {
         int c = calculateCost(a);
         removeIllegal(a);
-        System.out.println("Seriful are " + c + " bani dupa verificare");
+        this.setScore(this.getScore()+c);
+        b.setScore(b.getScore()-c);
     }
+
+    public void addTaraba(ArrayList<Integer> a) {
+        for (int i = 0; i<a.size(); i++) {
+            this.taraba.add(a.get(i));
+        }
+    }
+
+    public ArrayList<Integer> getTaraba() {
+        return this.taraba;
+    }
+
 
     //public void startSheriff(ArrayList<Integer> a) {System.out.println("playerb");}
 
