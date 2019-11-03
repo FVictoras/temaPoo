@@ -67,6 +67,24 @@ public class PlayerUtils {
         return mostValueable;
     }
 
+    public static int mostValuableIllegal(ArrayList<Integer> a) {
+        int max_value = -1;
+        int mostValueable = -1;
+        for (int i = 0; i < a.size(); i++) {
+            if (a.get(i) > 10) {
+                if (Singletone.getGoodsById(a.get(i)).getProfit() == max_value) {
+                    mostValueable = a.get(i);
+                }
+                if (Singletone.getGoodsById(a.get(i)).getProfit() > max_value) {
+                    max_value = Singletone.getGoodsById(a.get(i)).getProfit();
+//                System.out.println(max_value);
+                    mostValueable = a.get(i);
+                }
+            }
+        }
+        return mostValueable;
+    }
+
     //Sorteaza descrescator
     public static ArrayList<Integer> highToLowSort(ArrayList<Integer> a) {
         a.sort(null);
@@ -83,6 +101,15 @@ public class PlayerUtils {
 //        System.out.println("SUNT DOAR ILEGALE");
 
         return true;
+    }
+
+    public static boolean minimumOneIlegal(ArrayList<Integer> a) {
+        for (int i = 0; i < a.size(); i++) {
+            if (a.get(i) > 10) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //Returneaza un sir plin cu n lung de frecventa aparitiei lui n in a.

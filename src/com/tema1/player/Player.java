@@ -9,6 +9,7 @@ public abstract class Player {
     private ArrayList<Integer> pocket = new ArrayList<Integer>(8);
 
     public Player() {
+        this.setScore(80);
     }
 
     public Player(ArrayList<Integer> arr) {
@@ -57,6 +58,10 @@ public abstract class Player {
         this.pocket = pocket;
     }
 
+    public void addPocket(int a) {
+        this.pocket.add(a);
+    }
+
     public void startSheriff(ArrayList<Integer> a, Player b) {
         System.out.println("player");
     }
@@ -66,4 +71,6 @@ public abstract class Player {
     public abstract void addTaraba(ArrayList<Integer> a);
 
     public abstract void buildPocket();
+
+    public abstract void buildPocket(int n);
 }

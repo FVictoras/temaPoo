@@ -33,6 +33,9 @@ public class BasicPlayer extends Player {
         this.setPocket(BasicPlayerUtils.basicPocket(cards));
     }
 
+    public void buildPocket(int n) {
+    }
+
     public int getTotalCost() {
         return this.totalCost;
     }
