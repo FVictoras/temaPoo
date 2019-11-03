@@ -13,7 +13,7 @@ public class BribedPlayer extends Player {
 
     @Override
     public String toString() {
-        return "bribed: cartile: " + getCardsId() + " taraba:" + getTaraba() + " aur:" + super.getScore();
+        return "bribed: " + " taraba:" + getTaraba() + " aur:" + super.getScore();
     }
 
     public void takeCards(ArrayList<Integer> a) {

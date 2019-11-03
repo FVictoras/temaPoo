@@ -10,7 +10,7 @@ public class GreedyPlayer extends Player {
 
     @Override
     public String toString() {
-        return "greedy: cartile: " + getCardsId() + " taraba:" + getTaraba() + " aur:" + super.getScore();
+        return "greedy: " + " taraba:" + getTaraba() + " aur:" + super.getScore();
     }
 
     public void takeCards(ArrayList<Integer> a) {
@@ -30,6 +30,10 @@ public class GreedyPlayer extends Player {
 
     public void buildPocket() {
         super.setPocket(BasicPlayerUtils.basicPocket(cards));
+        if (this.getPocket().get(0) < 20)
+            this.setDeclared(getPocket().get(0));
+        else
+            this.setDeclared(0);
     }
 
     public void startSheriff(ArrayList<Integer> a, Player b) {

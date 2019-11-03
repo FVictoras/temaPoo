@@ -21,7 +21,7 @@ public class BasicPlayer extends Player {
 
     @Override
     public String toString() {
-        return "cartile: " + getCardsId() + " taraba:" + getTaraba() + " aur:" + getScore();
+        return "basic :" + " taraba:" + getTaraba() + " aur:" + getScore();
     }
 
     @Override
