@@ -7,6 +7,7 @@ public abstract class Player {
     private int Score;
     private boolean isSheriff;
     private int declared;
+    private int bribe;
     private ArrayList<Integer> pocket = new ArrayList<Integer>(8);
 
     public Player() {
@@ -21,6 +22,14 @@ public abstract class Player {
 
     public int getDeclared() {
         return this.declared;
+    }
+
+    public int getBribe() {
+        return bribe;
+    }
+
+    public void setBribe(int bribe) {
+        this.bribe = bribe;
     }
 
     public void setDeclared(int d) {

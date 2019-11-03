@@ -103,6 +103,13 @@ public class PlayerUtils {
         return true;
     }
 
+    public static boolean allLegal(ArrayList<Integer> a) {
+        if ((PlayerUtils.highToLowSort(a)).get(0) < 10) {
+            return true;
+        }
+        return false;
+    }
+
     public static boolean minimumOneIlegal(ArrayList<Integer> a) {
         for (int i = 0; i < a.size(); i++) {
             if (a.get(i) > 10) {
@@ -112,6 +119,30 @@ public class PlayerUtils {
         return false;
     }
 
+    public static ArrayList<Integer> sortedbyValueIndexhigh(ArrayList<Integer> a) {
+        ArrayList<Integer> c = new ArrayList<Integer>(a);
+        PlayerUtils.highToLowSort(c);
+        int aux;
+        int[] v = new int[c.size()];
+        for (int i = 0; i < c.size(); i++) {
+            v[i] = c.get(i);
+        }
+        for (int j = 0; j < c.size(); j++) {
+            for (int i = 0; i < c.size() - 1; i++) {
+                if (Singletone.getGoodsById(v[i]).getProfit() < Singletone.getGoodsById(v[i + 1]).getProfit()) {
+                    aux = v[i];
+                    v[i] = v[i + 1];
+                    v[i + 1] = aux;
+                }
+            }
+        }
+        aux = c.size();
+        c.clear();
+        for (int i = 0; i < aux; i++) {
+            c.add(v[i]);
+        }
+        return c;
+    }
     //Returneaza un sir plin cu n lung de frecventa aparitiei lui n in a.
     public static ArrayList<Integer> foundIn(ArrayList<Integer> a, int n) {
         ArrayList<Integer> res = new ArrayList<Integer>();
