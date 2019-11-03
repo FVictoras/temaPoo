@@ -6,6 +6,7 @@ public abstract class Player {
     private ArrayList<Integer> CardsId = new ArrayList<Integer>(10);
     private int Score;
     private boolean isSheriff;
+    private int declared;
     private ArrayList<Integer> pocket = new ArrayList<Integer>(8);
 
     public Player() {
@@ -18,6 +19,13 @@ public abstract class Player {
         this.setSheriff(false);
     }
 
+    public int getDeclared() {
+        return this.declared;
+    }
+
+    public void setDeclared(int d) {
+        this.declared = d;
+    }
     public void changeScore(int add) {
         this.setScore(this.getScore() + add);
     }

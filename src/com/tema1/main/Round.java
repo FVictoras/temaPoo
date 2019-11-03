@@ -2,6 +2,7 @@ package com.tema1.main;
 
 import com.tema1.goods.GoodsFactory;
 import com.tema1.player.BasicPlayer;
+import com.tema1.player.GreedyPlayer;
 import com.tema1.player.Player;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class Round {
     int nPlayers;
     int nRounds;
     ArrayList<Integer> cards;
+    ArrayList<String> names;
     ArrayList<Integer> safeCards;
     ArrayList<Integer> a = new ArrayList<Integer>(Arrays.asList(21, 22, 23, 24, 21, 22, 22, 23, 24, 21));
 
@@ -21,11 +23,15 @@ public class Round {
         this.nPlayers = np;
         this.nRounds = nr;
         this.players = new ArrayList<Player>();
+        this.names = new ArrayList<String>(s);
         this.cards = new ArrayList<Integer>(c);
         this.safeCards = new ArrayList<Integer>(c);
         for (int i = 0; i < s.size(); i++) {
             if (s.get(i).equals("basic")) {
                 players.add(new BasicPlayer(a));
+            }
+            if (s.get(i).equals("greedy")) {
+                players.add(new GreedyPlayer());
             }
         }
     }
@@ -47,24 +53,32 @@ public class Round {
 
     public void sellTaraba() {
 
-        for (int i = 0; i<players.size(); i++) {
-            for(int j=0; j<players.get(i).getTaraba().size(); j++) {
+        for (int i = 0; i < players.size(); i++) {
+            for (int j = 0; j < players.get(i).getTaraba().size(); j++) {
                 players.get(i).changeScore(Singletone.getGoodsById(players.get(i).getTaraba().get(j)).getProfit());
             }
         }
     }
 
     public void Game() {
-        for (int k = 0; k < 2; k++) {
+        for (int k = 1; k <= 4; k++) {
             System.out.println("Game started !@##$#@#@%#$^^#$#$");
             for (int i = 0; i < players.size(); i++) {
                 players.get(i).setSheriff(true);
                 for (int j = 0; j < players.size(); j++) {
                     if (i != j) {
-                        players.get(j).takeCards(firstTen());
-                        players.get(j).buildPocket();
-                        players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
-                        players.get(j).addTaraba(players.get(j).getPocket());
+                        if (names.get(j).equals("basic")) {
+                            players.get(j).takeCards(firstTen());
+                            players.get(j).buildPocket();
+                            players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                            players.get(j).addTaraba(players.get(j).getPocket());
+                        }
+                        if (names.get(j).equals("greedy")) {
+                            players.get(j).takeCards(firstTen());
+                            players.get(j).buildPocket(k);
+                            players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                            players.get(j).addTaraba(players.get(j).getPocket());
+                        }
                     }
                 }
             }

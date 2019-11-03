@@ -6,6 +6,7 @@ import java.util.Iterator;
 public class BasicPlayer extends Player {
     private ArrayList<Integer> cards;
     private int playerID;
+
     private int totalCost = 0;
     private ArrayList<Integer> taraba = new ArrayList<Integer>();
 
@@ -31,7 +32,12 @@ public class BasicPlayer extends Player {
 
     public void buildPocket() {
         this.setPocket(BasicPlayerUtils.basicPocket(cards));
+        if (this.getPocket().get(0) < 20)
+            this.setDeclared(getPocket().get(0));
+        else
+            this.setDeclared(0);
     }
+
 
     public void buildPocket(int n) {
     }
@@ -40,13 +46,26 @@ public class BasicPlayer extends Player {
         return this.totalCost;
     }
 
-    public int calculateCost(ArrayList<Integer> a) {
+    public int calculateCost(ArrayList<Integer> a, int declared) {
         int cost = 0;
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i) < 10) {
-                cost = cost - 2;
-            } else {
-                cost = cost + 4;
+
+        if (PlayerUtils.minimumOneIlegal(a) == true) {
+            for (int i = 0; i < a.size(); i++) {
+                if (a.get(i) != declared) {
+                    if (a.get(i) < 10) {
+                        cost = cost + 2;
+                    } else {
+                        cost = cost + 4;
+                    }
+                }
+            }
+        } else {
+            for (int i = 0; i < a.size(); i++) {
+                if (a.get(i) < 10) {
+                    cost = cost - 2;
+                } else {
+                    cost = cost + 4;
+                }
             }
         }
         this.totalCost = this.totalCost + cost;
@@ -63,7 +82,7 @@ public class BasicPlayer extends Player {
     }
 
     public void startSheriff(ArrayList<Integer> a, Player b) {
-        int c = calculateCost(a);
+        int c = calculateCost(a, b.getDeclared());
         removeIllegal(a);
         this.setScore(this.getScore()+c);
         b.setScore(b.getScore()-c);
