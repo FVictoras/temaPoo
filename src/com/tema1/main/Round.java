@@ -61,7 +61,7 @@ public class Round {
     }
 
     public void Game() {
-        for (int k = 1; k <= 4; k++) {
+        for (int k = 1; k <= 2; k++) {
             System.out.println("Game started !@##$#@#@%#$^^#$#$");
             for (int i = 0; i < players.size(); i++) {
                 players.get(i).setSheriff(true);
