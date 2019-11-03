@@ -2,6 +2,7 @@ package com.tema1.main;
 
 import com.tema1.goods.GoodsFactory;
 import com.tema1.player.BasicPlayer;
+import com.tema1.player.BribedPlayer;
 import com.tema1.player.GreedyPlayer;
 import com.tema1.player.Player;
 
@@ -33,6 +34,9 @@ public class Round {
             if (s.get(i).equals("greedy")) {
                 players.add(new GreedyPlayer());
             }
+            if (s.get(i).equals("bribed")) {
+                players.add(new BribedPlayer());
+            }
         }
     }
 
@@ -61,23 +65,65 @@ public class Round {
     }
 
     public void Game() {
+        int stanga;
+        int dreapta;
         for (int k = 1; k <= 2; k++) {
             System.out.println("Game started !@##$#@#@%#$^^#$#$");
             for (int i = 0; i < players.size(); i++) {
                 players.get(i).setSheriff(true);
-                for (int j = 0; j < players.size(); j++) {
-                    if (i != j) {
-                        if (names.get(j).equals("basic")) {
+                if (names.get(i).equals("bribed")) {
+                    for (int j = 0; j < players.size(); j++) {
+                        if (i != j) {
                             players.get(j).takeCards(firstTen());
                             players.get(j).buildPocket();
-                            players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
-                            players.get(j).addTaraba(players.get(j).getPocket());
                         }
-                        if (names.get(j).equals("greedy")) {
-                            players.get(j).takeCards(firstTen());
-                            players.get(j).buildPocket(k);
-                            players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
-                            players.get(j).addTaraba(players.get(j).getPocket());
+                    }
+                    if (players.size() > 2) {
+                        stanga = i + 1;
+                        dreapta = i - 1;
+                        if (i == players.size() - 1) {
+                            stanga = 0;
+                            dreapta = i - 1;
+                        }
+                        if (i == 0) {
+                            stanga = players.size() - 1;
+                            dreapta = i + 1;
+                        }
+                        players.get(i).startSheriff(players.get(stanga).getPocket(), players.get(stanga));
+                        players.get(i).startSheriff(players.get(dreapta).getPocket(), players.get(dreapta));
+                        for (int j = 0; j < players.size(); j++) {
+                            if (j != stanga && j != dreapta) {
+                                players.get(i).checkBribe(players.get(j));
+                            }
+                        }
+                    } else {
+                        if (i == 0) {
+                            players.get(0).startSheriff(players.get(1).getPocket(), players.get(1));
+                        } else {
+                            players.get(1).startSheriff(players.get(0).getPocket(), players.get(0));
+                        }
+                    }
+                } else {
+                    for (int j = 0; j < players.size(); j++) {
+                        if (i != j) {
+                            if (names.get(j).equals("basic")) {
+                                players.get(j).takeCards(firstTen());
+                                players.get(j).buildPocket();
+                                players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                                players.get(j).addTaraba(players.get(j).getPocket());
+                            }
+                            if (names.get(j).equals("greedy")) {
+                                players.get(j).takeCards(firstTen());
+                                players.get(j).buildPocket(k);
+                                players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                                players.get(j).addTaraba(players.get(j).getPocket());
+                            }
+                            if (names.get(j).equals("bribed")) {
+                                players.get(j).takeCards(firstTen());
+                                players.get(j).buildPocket();
+                                players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                                players.get(j).addTaraba(players.get(j).getPocket());
+                            }
                         }
                     }
                 }

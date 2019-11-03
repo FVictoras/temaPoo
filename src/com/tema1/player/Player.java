@@ -89,5 +89,13 @@ public abstract class Player {
 
     public abstract void buildPocket();
 
+    public void checkBribe(Player a) {
+        if (a.getBribe() > 0) {
+            this.setScore(this.getScore() + a.getBribe());
+            a.setScore(a.getScore() - a.getBribe());
+            a.setBribe(0);
+        }
+    }
+
     public abstract void buildPocket(int n);
 }

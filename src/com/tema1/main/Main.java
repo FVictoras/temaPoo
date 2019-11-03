@@ -1,8 +1,6 @@
 package com.tema1.main;
 
 import com.tema1.goods.GoodsFactory;
-import com.tema1.player.BribedPlayer;
-import com.tema1.player.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,13 +66,22 @@ public final class Main {
 //        System.out.println(joc.players.get(1));
         ///////////////////////////////////////////////////////////
 
-        ArrayList<Integer> b = new ArrayList<Integer>(Arrays.asList(21, 22, 22, 3, 5, 7, 3, 8, 5, 2, 4, 7, 9, 1, 2, 0, 0, 0, 3, 4, 23, 24, 21, 20));
-        ArrayList<Integer> a = new ArrayList<Integer>(Arrays.asList(0, 0, 1, 2, 3, 4, 5, 6, 7, 8));
-        Player bribed = new BribedPlayer();
-        // System.out.println(PlayerUtils.sortedbyValueIndexhigh(b));
-        bribed.takeCards(a);
-        bribed.buildPocket();
-
+//        ArrayList<Integer> b = new ArrayList<Integer>(Arrays.asList(21, 22, 22, 3, 5, 7, 3, 8, 5, 2, 4, 7, 9, 1, 2, 0, 0, 0, 3, 4, 23, 24, 21, 20));
+//        ArrayList<Integer> a = new ArrayList<Integer>(Arrays.asList(0, 0, 1, 2, 3, 4, 5, 6, 7, 8));
+//        Player bribed = new BribedPlayer();
+//        // System.out.println(PlayerUtils.sortedbyValueIndexhigh(b));
+//        bribed.takeCards(a);
+//        bribed.buildPocket();
+        //////////////Testing for all///////////////////
+        ArrayList<Integer> c = new ArrayList<Integer>(Arrays.asList(3, 23, 3, 9, 22, 24, 24, 22, 1, 7, 23, 23, 2, 5, 23, 8, 9, 9, 8, 2, 4, 0, 21, 24, 8, 4, 2, 9, 22, 23, 1, 9, 2, 4, 3, 0, 24, 23, 24, 9));
+        ArrayList<String> s = new ArrayList<String>(Arrays.asList("bribed", "basic"));
+        System.out.println(s);
+        Round joc = new Round(2, 1, c, s);
+        //   System.out.println(joc.players);
+        joc.Game();
+        System.out.println(joc.players.get(0));
+        System.out.println(joc.players.get(1));
+        ///////////////////////////////////////////////////////////
 
 
     }

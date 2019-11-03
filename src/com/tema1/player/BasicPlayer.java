@@ -72,18 +72,18 @@ public class BasicPlayer extends Player {
         return cost;
     }
 
-    public void removeIllegal(ArrayList<Integer> a) {
+    public void removeIllegal(ArrayList<Integer> a, int declared) {
         Iterator itr = a.iterator();
         while (itr.hasNext()) {
             int x = (Integer) itr.next();
-            if (x > 10)
+            if (x > 10 || x != declared)
                 itr.remove();
         }
     }
 
     public void startSheriff(ArrayList<Integer> a, Player b) {
         int c = calculateCost(a, b.getDeclared());
-        removeIllegal(a);
+        removeIllegal(a, b.getDeclared());
         this.setScore(this.getScore()+c);
         b.setScore(b.getScore()-c);
     }
