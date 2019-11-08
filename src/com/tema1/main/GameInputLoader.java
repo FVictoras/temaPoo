@@ -1,9 +1,8 @@
 package com.tema1.main;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import fileio.FileSystem;
+
+import java.util.ArrayList;
 
 public class GameInputLoader {
 	// DO NOT MODIFY
@@ -16,8 +15,8 @@ public class GameInputLoader {
     }
 
     public GameInput load() {
-    	List<Integer> assetsIds = new ArrayList<>();
-        List<String> playerOrder = new ArrayList<>();
+        ArrayList<Integer> assetsIds = new ArrayList<>();
+        ArrayList<String> playerOrder = new ArrayList<>();
         int rounds = 0;
         int noPlayers = 0;
         int noGoods = 0;

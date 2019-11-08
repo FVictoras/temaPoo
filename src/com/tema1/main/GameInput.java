@@ -1,11 +1,11 @@
 package com.tema1.main;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class GameInput {
     // DO NOT MODIFY
-    private final List<Integer> mAssetOrder;
-    private final List<String> mPlayersOrder;
+    private final ArrayList<Integer> mAssetOrder;
+    private final ArrayList<String> mPlayersOrder;
     private int mRounds;
 
     GameInput() {
@@ -14,17 +14,17 @@ public class GameInput {
         mRounds = -1;
     }
 
-    public GameInput(final int rounds, final List<Integer> assets, final List<String> players) {
+    public GameInput(final int rounds, final ArrayList<Integer> assets, final ArrayList<String> players) {
         mAssetOrder = assets;
         mPlayersOrder = players;
         mRounds = rounds;
     }
 
-    public final List<Integer> getAssetIds() {
+    public final ArrayList<Integer> getAssetIds() {
         return mAssetOrder;
     }
 
-    public final List<String> getPlayerNames() {
+    public final ArrayList<String> getPlayerNames() {
         return mPlayersOrder;
     }
     

@@ -2,10 +2,7 @@ package com.tema1.player;
 
 import com.tema1.goods.GoodsFactory;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PlayerUtils {
     // Singletone al goodsfactory
@@ -101,6 +98,17 @@ public class PlayerUtils {
 //        System.out.println("SUNT DOAR ILEGALE");
 
         return true;
+    }
+
+    public static void removeCard(ArrayList<Integer> a, ArrayList<Integer> n) {
+        Iterator itr = a.iterator();
+        while (itr.hasNext()) {
+            int x = (Integer) itr.next();
+            if (x == n.get((n.size() - 1))) {
+                itr.remove();
+                break;
+            }
+        }
     }
 
     public static boolean allLegal(ArrayList<Integer> a) {

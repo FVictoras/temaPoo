@@ -78,6 +78,7 @@ public class BasicPlayer extends Player {
         int c = calculateCost(a, b.getDeclared());
         removeIllegal(a, b.getDeclared());
         this.setScore(this.getScore()+c);
+        System.out.println("sunt BASIC Am primit " + c + "aur ca serif si am acum: " + getScore());
         b.setScore(b.getScore()-c);
     }
 

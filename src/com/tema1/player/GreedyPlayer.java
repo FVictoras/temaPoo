@@ -45,10 +45,12 @@ public class GreedyPlayer extends Player {
         if (b.getBribe() > 0) {
             b.setScore(b.getScore() - b.getBribe());
             this.setScore(this.getScore() + b.getBribe());
+            System.out.println("sunt GREEDY Am primit " + b.getBribe() + "aur MITA ca serif si am acum: " + getScore());
         } else {
             int c = calculateCost(a, b.getDeclared());
             removeIllegal(a, b.getDeclared());
             this.setScore(this.getScore() + c);
+            System.out.println("sunt GREEDY Am primit " + c + "aur ca serif am acum: " + getScore());
             b.setScore(b.getScore() - c);
         }
     }
@@ -94,8 +96,11 @@ public class GreedyPlayer extends Player {
             this.buildPocket();
         } else {
             this.buildPocket();
+            //remove card
             if (PlayerUtils.minimumOneIlegal(this.cards)) {
+                PlayerUtils.removeCard(this.cards, this.getPocket());
                 super.addPocket(PlayerUtils.mostValuableIllegal(this.cards));
+                System.out.println("SUNT AICIIIIII" + this.cards);
             }
         }
         if (this.getPocket().get(0) < 20)

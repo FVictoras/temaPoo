@@ -40,7 +40,7 @@ public class BribedPlayer extends Player {
     @Override
     public void buildPocket() {
         this.setPocket(BribedPlayerUtils.buildPocket(copycards, this));
-        //  System.out.println("pocketul este:" + this.getPocket() + " are " + this.getBribe() + " monezi MITA si jucatorul are " + this.getScore() + "bani");
+        System.out.println("pocketul este:" + this.getPocket() + " are " + this.getBribe() + " monezi MITA si jucatorul are " + this.getScore() + "bani" + "      am cartile" + this.cards);
         if (this.getPocket().get(0) < 20)
             this.setDeclared(getPocket().get(0));
         else
@@ -51,6 +51,7 @@ public class BribedPlayer extends Player {
         int c = calculateCost(a, b.getDeclared());
         removeIllegal(a, b.getDeclared());
         this.setScore(this.getScore() + c);
+        System.out.println("sunt BRIBED Am primit " + c + "aur ca serifsi am acum: " + getScore());
         b.setScore(b.getScore() - c);
     }
 

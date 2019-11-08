@@ -17,7 +17,10 @@ public class BribedPlayerUtils {
             c = new ArrayList<Integer>(PlayerUtils.sortedbyValueIndexhigh(a));
             int i = 0;
             while (pocket.size() < 8) {
-
+                if (i > 9) {
+                    System.out.println("Ies pe aici222");
+                    break;
+                }
                 if (c.get(i) > 9 && money - cost - 4 > 0) {
                     cost = cost + 4;
                     pocket.add(c.get(i));
@@ -28,11 +31,13 @@ public class BribedPlayerUtils {
                     pocket.add(c.get(i));
                 }
                 if (money - cost <= 2) {
+                    System.out.println("Ies pe aici");
                     break;
                 }
                 i++;
+                System.out.println("********am fost aici" + i);
             }
-            System.out.println(money - cost);
+//            System.out.println(money - cost);
             if (nIllegal > 2) {
                 pl.setBribe(10);
             }

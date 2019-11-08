@@ -49,7 +49,7 @@ public class Round {
             int x = (Integer) itr.next();
             itr.remove();
         }
-        System.out.println(ret);
+//        System.out.println(ret);
         return ret;
     }
 
@@ -105,17 +105,17 @@ public class Round {
         int stanga;
         int dreapta;
         for (int k = 1; k <= nRounds; k++) {
-            System.out.println("Game started !@##$#@#@%#$^^#$#$");
             for (int i = 0; i < players.size(); i++) {
                 players.get(i).setSheriff(true);
-
-
                 // Tot iful dedicat sherifului bribed
                 if (names.get(i).equals("bribed")) {
                     for (int j = 0; j < players.size(); j++) {
                         if (i != j) {
                             players.get(j).takeCards(firstTen());
-                            players.get(j).buildPocket();
+                            if (names.get(j).equals("greedy"))
+                                players.get(j).buildPocket(k);
+                            else
+                                players.get(j).buildPocket();
                         }
                     }
                     if (players.size() > 2) {
@@ -137,11 +137,13 @@ public class Round {
                         }
 
                         for (int j = 0; j < players.size(); j++) {
-                            if (j == stanga || j == dreapta) {
-                                players.get(j).addTaraba(players.get(j).getPocket());
-                            } else {
-                                players.get(i).checkBribe(players.get(j));
-                                players.get(j).addTaraba(players.get(j).getPocket());
+                            if (j != i) {
+                                if (j == stanga || j == dreapta) {
+                                    players.get(j).addTaraba(players.get(j).getPocket());
+                                } else {
+                                    players.get(i).checkBribe(players.get(j));
+                                    players.get(j).addTaraba(players.get(j).getPocket());
+                                }
                             }
                         }
                     } else {
@@ -184,11 +186,19 @@ public class Round {
                                     players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
                                 }
                                 players.get(j).addTaraba(players.get(j).getPocket());
+
                             }
+
                         }
                     }
                 }
             }
+            // endul fiecarei runde
+            System.out.println("RUNDA " + k);
+            for (int i = 0; i < players.size(); i++) {
+                players.get(i).arataTotMuistuleTaraba();
+            }
+            System.out.println();
         }
         // valorificare
         //
@@ -198,9 +208,6 @@ public class Round {
         Bonus.bonusIllegal(players);
         Bonus.bonusKingAndQueen(players);
         sellTaraba();
-        System.out.println();
-        System.out.println();
-        System.out.println();
         printScoreboard();
     }
 }

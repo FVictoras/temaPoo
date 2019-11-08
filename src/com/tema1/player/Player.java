@@ -32,11 +32,12 @@ public abstract class Player {
         this.bribe = bribe;
     }
 
-    public int compareTo(Player comparestu) {
-        int compareage = ((Player) comparestu).getScore();
+    public int compareTo(Player p) {
+        int comparescore = ((Player) p).getScore();
         /* For Ascending order*/
-        return this.getScore() - compareage;
-
+        if (comparescore - this.getScore() == 0 && p.getPlayerID() < this.playerID)
+            return this.getScore() - comparescore - 1;
+        return this.getScore() - comparescore;
         /* For Descending order do like this */
         //return compareage-this.studentage;
     }
@@ -90,7 +91,7 @@ public abstract class Player {
     }
 
     public void startSheriff(ArrayList<Integer> a, Player b) {
-        System.out.println("player");
+//        System.out.println("player");
     }
 
     public abstract ArrayList<Integer> getTaraba();
@@ -98,6 +99,14 @@ public abstract class Player {
     public abstract void addTaraba(ArrayList<Integer> a);
 
     public abstract void addIllegalBonusCard(int n);
+
+    public void arataTotMuistulePachet() {
+        System.out.println("id:" + playerID + "am pachetul" + getPocket() + "am banii:" + getScore());
+    }
+
+    public void arataTotMuistuleTaraba() {
+        System.out.println("id:" + playerID + "am taraba" + getTaraba() + "am banii:" + getScore());
+    }
 
     public abstract void buildPocket();
 
