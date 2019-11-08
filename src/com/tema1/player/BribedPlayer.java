@@ -7,13 +7,16 @@ public class BribedPlayer extends Player {
 
     private ArrayList<Integer> cards;
     private ArrayList<Integer> copycards;
-    private int playerID;
     private int totalCost = 0;
     private ArrayList<Integer> taraba = new ArrayList<Integer>();
 
+    public BribedPlayer(int id) {
+        super(id);
+    }
+
     @Override
     public String toString() {
-        return "bribed: " + " taraba:" + getTaraba() + " aur:" + super.getScore();
+        return "BRIBED " + super.getScore();
     }
 
     public void takeCards(ArrayList<Integer> a) {

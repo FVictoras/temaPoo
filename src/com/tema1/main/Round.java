@@ -6,9 +6,7 @@ import com.tema1.player.BribedPlayer;
 import com.tema1.player.GreedyPlayer;
 import com.tema1.player.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
+import java.util.*;
 
 public class Round {
     ArrayList<Player> players;
@@ -29,13 +27,13 @@ public class Round {
         this.safeCards = new ArrayList<Integer>(c);
         for (int i = 0; i < s.size(); i++) {
             if (s.get(i).equals("basic")) {
-                players.add(new BasicPlayer(a));
+                players.add(new BasicPlayer(i));
             }
             if (s.get(i).equals("greedy")) {
-                players.add(new GreedyPlayer());
+                players.add(new GreedyPlayer(i));
             }
             if (s.get(i).equals("bribed")) {
-                players.add(new BribedPlayer());
+                players.add(new BribedPlayer(i));
             }
         }
     }
@@ -64,10 +62,49 @@ public class Round {
         }
     }
 
+    public boolean checkOver16(Player obj) {
+        if (obj.getScore() >= 16) {
+            return true;
+        } else
+            return false;
+    }
+
+    public void printScoreboard() {
+
+//       ArrayList<Player> top = new ArrayList<Player>();
+//       for (int j = 0; j<players.size(); j++) {
+//           int max = -1;
+//           int maxID=-1;
+//           for (int i = 0; i < players.size(); i++) {
+//               if (players.get(i).getScore() > max) {
+//                   max = players.get(i).getScore();
+//                   maxID = i;
+//               }
+//           }
+//           top.add(players.get(maxID));
+//           players.remove(maxID);
+//       }
+//       for (int i = 0; i<top.size(); i++) {
+//           System.out.println(top.get(i).getPlayerID()+ "Score:" + top.get(i));
+//       }
+        Collections.sort(players, new Comparator<Player>() {
+            @Override
+            public int compare(Player o1, Player o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        Collections.reverse(players);
+        for (int i = 0; i < players.size(); i++) {
+            System.out.println(players.get(i).getPlayerID() + " " + players.get(i));
+        }
+
+
+    }
+
     public void Game() {
         int stanga;
         int dreapta;
-        for (int k = 1; k <= 2; k++) {
+        for (int k = 1; k <= nRounds; k++) {
             System.out.println("Game started !@##$#@#@%#$^^#$#$");
             for (int i = 0; i < players.size(); i++) {
                 players.get(i).setSheriff(true);
@@ -92,8 +129,12 @@ public class Round {
                             stanga = players.size() - 1;
                             dreapta = i + 1;
                         }
-                        players.get(i).startSheriff(players.get(stanga).getPocket(), players.get(stanga));
-                        players.get(i).startSheriff(players.get(dreapta).getPocket(), players.get(dreapta));
+                        if (this.checkOver16(players.get(i))) {
+                            players.get(i).startSheriff(players.get(stanga).getPocket(), players.get(stanga));
+                        }
+                        if (this.checkOver16(players.get(i))) {
+                            players.get(i).startSheriff(players.get(dreapta).getPocket(), players.get(dreapta));
+                        }
 
                         for (int j = 0; j < players.size(); j++) {
                             if (j == stanga || j == dreapta) {
@@ -105,12 +146,14 @@ public class Round {
                         }
                     } else {
                         if (i == 0) {
-                            System.out.println("Heii sunt  si am: packet" + players.get(1).getPocket());
-                            players.get(0).startSheriff(players.get(1).getPocket(), players.get(1));
-                            System.out.println("Heii sunt si am: packet" + players.get(1).getPocket());
+                            if (this.checkOver16(players.get(0))) {
+                                players.get(0).startSheriff(players.get(1).getPocket(), players.get(1));
+                            }
                             players.get(1).addTaraba(players.get(1).getPocket());
                         } else {
-                            players.get(1).startSheriff(players.get(0).getPocket(), players.get(0));
+                            if (this.checkOver16(players.get(1))) {
+                                players.get(1).startSheriff(players.get(0).getPocket(), players.get(0));
+                            }
                             players.get(0).addTaraba(players.get(0).getPocket());
                         }
                     }
@@ -121,19 +164,25 @@ public class Round {
                             if (names.get(j).equals("basic")) {
                                 players.get(j).takeCards(firstTen());
                                 players.get(j).buildPocket();
-                                players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                                if (this.checkOver16(players.get(i))) {
+                                    players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                                }
                                 players.get(j).addTaraba(players.get(j).getPocket());
                             }
                             if (names.get(j).equals("greedy")) {
                                 players.get(j).takeCards(firstTen());
                                 players.get(j).buildPocket(k);
-                                players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                                if (this.checkOver16(players.get(i))) {
+                                    players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                                }
                                 players.get(j).addTaraba(players.get(j).getPocket());
                             }
                             if (names.get(j).equals("bribed")) {
                                 players.get(j).takeCards(firstTen());
                                 players.get(j).buildPocket();
-                                players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                                if (this.checkOver16(players.get(i))) {
+                                    players.get(i).startSheriff(players.get(j).getPocket(), players.get(j));
+                                }
                                 players.get(j).addTaraba(players.get(j).getPocket());
                             }
                         }
@@ -143,10 +192,15 @@ public class Round {
         }
         // valorificare
         //
-        System.out.println(players.get(0));
-        System.out.println(players.get(1));
+//        System.out.println(players.get(0));
+//        System.out.println(players.get(1));
+////        System.out.println(players.get(2));
         Bonus.bonusIllegal(players);
         Bonus.bonusKingAndQueen(players);
         sellTaraba();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        printScoreboard();
     }
 }

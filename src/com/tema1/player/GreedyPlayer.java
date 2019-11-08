@@ -8,9 +8,14 @@ public class GreedyPlayer extends Player {
     private ArrayList<Integer> cards = new ArrayList<Integer>();
     private ArrayList<Integer> taraba = new ArrayList<Integer>();
 
+    public GreedyPlayer(int id) {
+        super(id);
+    }
+
+
     @Override
     public String toString() {
-        return "greedy: " + " taraba:" + getTaraba() + " aur:" + super.getScore();
+        return "GREEDY " + super.getScore();
     }
 
     public void takeCards(ArrayList<Integer> a) {

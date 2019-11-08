@@ -5,23 +5,16 @@ import java.util.Iterator;
 
 public class BasicPlayer extends Player {
     private ArrayList<Integer> cards;
-    private int playerID;
-
     private int totalCost = 0;
     private ArrayList<Integer> taraba = new ArrayList<Integer>();
 
-    public BasicPlayer() {
-    }
-
-    public BasicPlayer(ArrayList<Integer> c) {
-        super(c);
-
-
+    public BasicPlayer(int id) {
+        super(id);
     }
 
     @Override
     public String toString() {
-        return "basic :" + " taraba:" + getTaraba() + " aur:" + getScore();
+        return "BASIC " + getScore();
     }
 
     @Override

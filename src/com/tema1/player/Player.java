@@ -8,16 +8,12 @@ public abstract class Player {
     private boolean isSheriff;
     private int declared;
     private int bribe;
+    private int playerID;
     private ArrayList<Integer> pocket = new ArrayList<Integer>(8);
 
-    public Player() {
+    public Player(int id) {
         this.setScore(80);
-    }
-
-    public Player(ArrayList<Integer> arr) {
-        this.setCardsId(arr);
-        this.setScore(80);
-        this.setSheriff(false);
+        this.playerID = id;
     }
 
     public int getDeclared() {
@@ -28,9 +24,23 @@ public abstract class Player {
         return bribe;
     }
 
+    public int getPlayerID() {
+        return playerID;
+    }
+
     public void setBribe(int bribe) {
         this.bribe = bribe;
     }
+
+    public int compareTo(Player comparestu) {
+        int compareage = ((Player) comparestu).getScore();
+        /* For Ascending order*/
+        return this.getScore() - compareage;
+
+        /* For Descending order do like this */
+        //return compareage-this.studentage;
+    }
+
 
     public void setDeclared(int d) {
         this.declared = d;
