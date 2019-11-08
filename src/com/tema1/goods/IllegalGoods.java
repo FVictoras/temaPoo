@@ -14,4 +14,5 @@ public class IllegalGoods extends Goods {
 	public Map<Goods, Integer> getIllegalBonus() {
 		return illegalBonus;
 	}
+
 }

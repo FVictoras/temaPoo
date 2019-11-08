@@ -99,6 +99,11 @@ public class BasicPlayer extends Player {
     }
 
 
+    @Override
+    public void addIllegalBonusCard(int n) {
+        this.taraba.add(n);
+    }
+
     //public void startSheriff(ArrayList<Integer> a) {System.out.println("playerb");}
 
 }

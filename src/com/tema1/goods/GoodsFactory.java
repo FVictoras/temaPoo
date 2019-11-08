@@ -87,4 +87,5 @@ public class GoodsFactory {
 	public final Map<Integer, Goods> getAllGoods() {
 		return goodsById;
 	}
+
 }

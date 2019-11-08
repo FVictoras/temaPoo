@@ -73,16 +73,12 @@ public final class Main {
 //        bribed.takeCards(a);
 //        bribed.buildPocket();
         //////////////Testing for all///////////////////
-        ArrayList<Integer> c = new ArrayList<Integer>(Arrays.asList(0, 3, 1, 7, 8, 4, 6, 4, 6, 7, 5, 7, 1, 5, 4, 8, 6, 0, 0, 8, 6, 8, 8, 2, 6, 9, 9, 0, 3, 9, 8, 4, 5, 5, 5, 9, 2, 7, 4, 8, 6, 7, 4, 4, 9, 2, 3, 0, 6, 4, 7, 9, 8, 5, 4, 3, 6, 0, 8, 7
-        ));
-        ArrayList<String> s = new ArrayList<String>(Arrays.asList("bribed", "bribed", "bribed"));
+        ArrayList<Integer> c = new ArrayList<Integer>(Arrays.asList(9, 8, 21, 22, 7, 1, 6, 9, 9, 1, 7, 7, 2, 24, 8, 7, 23, 20, 7, 3, 7, 23, 4, 1, 2, 4, 9, 6, 23, 23, 0, 6, 2, 20, 24, 6, 21, 4, 1, 6));
+        ArrayList<String> s = new ArrayList<String>(Arrays.asList("greedy", "bribed"));
         System.out.println(s);
         Round joc = new Round(2, 1, c, s);
         //   System.out.println(joc.players);
         joc.Game();
-        System.out.println(joc.players.get(0));
-        System.out.println(joc.players.get(1));
-        System.out.println(joc.players.get(2));
 
 
         ///////////////////////////////////////////////////////////

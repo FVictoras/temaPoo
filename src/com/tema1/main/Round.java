@@ -67,10 +67,13 @@ public class Round {
     public void Game() {
         int stanga;
         int dreapta;
-        for (int k = 1; k <= 1; k++) {
+        for (int k = 1; k <= 2; k++) {
             System.out.println("Game started !@##$#@#@%#$^^#$#$");
             for (int i = 0; i < players.size(); i++) {
                 players.get(i).setSheriff(true);
+
+
+                // Tot iful dedicat sherifului bribed
                 if (names.get(i).equals("bribed")) {
                     for (int j = 0; j < players.size(); j++) {
                         if (i != j) {
@@ -90,20 +93,21 @@ public class Round {
                             dreapta = i + 1;
                         }
                         players.get(i).startSheriff(players.get(stanga).getPocket(), players.get(stanga));
-                        players.get(stanga).addTaraba(players.get(stanga).getPocket());
                         players.get(i).startSheriff(players.get(dreapta).getPocket(), players.get(dreapta));
-                        players.get(dreapta).addTaraba(players.get(dreapta).getPocket());
+
                         for (int j = 0; j < players.size(); j++) {
-                            if (j != stanga && j != dreapta) {
+                            if (j == stanga || j == dreapta) {
+                                players.get(j).addTaraba(players.get(j).getPocket());
+                            } else {
                                 players.get(i).checkBribe(players.get(j));
                                 players.get(j).addTaraba(players.get(j).getPocket());
                             }
                         }
                     } else {
                         if (i == 0) {
-                            System.out.println("Heii sunt greedy si am: packet" + players.get(1).getPocket());
+                            System.out.println("Heii sunt  si am: packet" + players.get(1).getPocket());
                             players.get(0).startSheriff(players.get(1).getPocket(), players.get(1));
-                            System.out.println("Heii sunt greedy si am: packet" + players.get(1).getPocket());
+                            System.out.println("Heii sunt si am: packet" + players.get(1).getPocket());
                             players.get(1).addTaraba(players.get(1).getPocket());
                         } else {
                             players.get(1).startSheriff(players.get(0).getPocket(), players.get(0));
@@ -111,6 +115,7 @@ public class Round {
                         }
                     }
                 } else {
+                    // serif oricare altul
                     for (int j = 0; j < players.size(); j++) {
                         if (i != j) {
                             if (names.get(j).equals("basic")) {
@@ -137,6 +142,11 @@ public class Round {
             }
         }
         // valorificare
-        //sellTaraba();
+        //
+        System.out.println(players.get(0));
+        System.out.println(players.get(1));
+        Bonus.bonusIllegal(players);
+        Bonus.bonusKingAndQueen(players);
+        sellTaraba();
     }
 }

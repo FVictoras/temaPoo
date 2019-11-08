@@ -100,4 +100,8 @@ public class BribedPlayer extends Player {
 
     }
 
+    @Override
+    public void addIllegalBonusCard(int n) {
+        this.taraba.add(n);
+    }
 }

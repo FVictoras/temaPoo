@@ -87,6 +87,8 @@ public abstract class Player {
 
     public abstract void addTaraba(ArrayList<Integer> a);
 
+    public abstract void addIllegalBonusCard(int n);
+
     public abstract void buildPocket();
 
     public void checkBribe(Player a) {

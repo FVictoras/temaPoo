@@ -99,4 +99,8 @@ public class GreedyPlayer extends Player {
             this.setDeclared(0);
     }
 
+    @Override
+    public void addIllegalBonusCard(int n) {
+        this.taraba.add(n);
+    }
 }
