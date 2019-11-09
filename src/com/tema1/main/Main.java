@@ -3,7 +3,7 @@ package com.tema1.main;
 public final class Main {
 
     public static void main(final String[] args) {
-        GameInputLoader gameInputLoader = new GameInputLoader("E:\\Java Development\\Tema1_2019_v1\\in\\2round3players-mixed-test15.in", "E:\\Java Development\\Tema1_2019_v1\\prostii");
+        GameInputLoader gameInputLoader = new GameInputLoader("E:\\Java Development\\Tema1_2019_v1\\in\\4round5players-mixed-test2.in", "E:\\Java Development\\Tema1_2019_v1\\prostii");
         GameInput gameInput = gameInputLoader.load();
 //        System.out.println(gameInput.getTotalPlayers());
         Round start = new Round(gameInput.getTotalPlayers(), gameInput.getRounds(), gameInput.getAssetIds(), gameInput.getPlayerNames());

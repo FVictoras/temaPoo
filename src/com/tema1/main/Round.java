@@ -129,12 +129,14 @@ public class Round {
                             stanga = players.size() - 1;
                             dreapta = i + 1;
                         }
-                        if (this.checkOver16(players.get(i))) {
-                            players.get(i).startSheriff(players.get(stanga).getPocket(), players.get(stanga));
-                        }
+                        // ATENTIE AICI
                         if (this.checkOver16(players.get(i))) {
                             players.get(i).startSheriff(players.get(dreapta).getPocket(), players.get(dreapta));
                         }
+                        if (this.checkOver16(players.get(i))) {
+                            players.get(i).startSheriff(players.get(stanga).getPocket(), players.get(stanga));
+                        }
+
 
                         for (int j = 0; j < players.size(); j++) {
                             if (j != i) {

@@ -10,7 +10,7 @@ public class BribedPlayerUtils {
         int nIllegal = 0;
         int cost = 0;
         //Daca tot ce are e legal
-        if (PlayerUtils.allLegal(a) || money < 5) {
+        if (PlayerUtils.allLegal(a) || money <= 5) {
             pl.setBribe(0);
             return BasicPlayerUtils.basicPocket(a);
         } else {
@@ -18,7 +18,6 @@ public class BribedPlayerUtils {
             int i = 0;
             while (pocket.size() < 8) {
                 if (i > 9) {
-                    System.out.println("Ies pe aici222");
                     break;
                 }
                 if (c.get(i) > 9 && money - cost - 4 > 0) {
@@ -31,11 +30,9 @@ public class BribedPlayerUtils {
                     pocket.add(c.get(i));
                 }
                 if (money - cost <= 2) {
-                    System.out.println("Ies pe aici");
                     break;
                 }
                 i++;
-                System.out.println("********am fost aici" + i);
             }
 //            System.out.println(money - cost);
             if (nIllegal > 2) {
