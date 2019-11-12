@@ -1,14 +1,16 @@
 package com.tema1.player;
 
+import com.tema1.common.Constants;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class BasicPlayer extends Player {
+public final class BasicPlayer extends Player {
     private ArrayList<Integer> cards;
     private int totalCost = 0;
     private ArrayList<Integer> taraba = new ArrayList<Integer>();
 
-    public BasicPlayer(int id) {
+    public BasicPlayer(final int id) {
         super(id);
     }
 
@@ -18,46 +20,41 @@ public class BasicPlayer extends Player {
     }
 
     @Override
-    public void takeCards(ArrayList<Integer> a) {
+    public void takeCards(final ArrayList<Integer> a) {
         super.setCardsId(a);
         this.cards = new ArrayList<Integer>(a);
     }
 
     public void buildPocket() {
         this.setPocket(BasicPlayerUtils.basicPocket(cards));
-        if (this.getPocket().get(0) < 20)
+        if (this.getPocket().get(0) < Constants.START_ILLEGAL) {
             this.setDeclared(getPocket().get(0));
-        else
+        } else {
             this.setDeclared(0);
+        }
     }
 
-
-    public void buildPocket(int n) {
+    public void buildPocket(final int n) {
     }
 
-    public int getTotalCost() {
-        return this.totalCost;
-    }
-
-    public int calculateCost(ArrayList<Integer> a, int declared) {
+    private int calculateCost(final ArrayList<Integer> a, final int declared) {
         int cost = 0;
-
-        if (PlayerUtils.minimumOneIlegal(a) == true) {
-            for (int i = 0; i < a.size(); i++) {
-                if (a.get(i) != declared) {
-                    if (a.get(i) < 10) {
-                        cost = cost + 2;
+        if (PlayerUtils.minimumOneIlegal(a)) {
+            for (Integer integer : a) {
+                if (integer != declared) {
+                    if (integer < Constants.END_LEGAL) {
+                        cost = cost + Constants.PENALTY_LEGAL;
                     } else {
-                        cost = cost + 4;
+                        cost = cost + Constants.PENALTY_ILLEGAL;
                     }
                 }
             }
         } else {
-            for (int i = 0; i < a.size(); i++) {
-                if (a.get(i) < 10) {
-                    cost = cost - 2;
+            for (Integer integer : a) {
+                if (integer < Constants.END_LEGAL) {
+                    cost = cost - Constants.PENALTY_LEGAL;
                 } else {
-                    cost = cost + 4;
+                    cost = cost + Constants.PENALTY_ILLEGAL;
                 }
             }
         }
@@ -65,36 +62,34 @@ public class BasicPlayer extends Player {
         return cost;
     }
 
-    public void removeIllegal(ArrayList<Integer> a, int declared) {
+    private void removeIllegal(final ArrayList<Integer> a, final int declared) {
         Iterator itr = a.iterator();
         while (itr.hasNext()) {
             int x = (Integer) itr.next();
-            if (x > 10 || x != declared)
+            if (x > Constants.END_LEGAL || x != declared) {
                 itr.remove();
+            }
         }
     }
 
-    public void startSheriff(ArrayList<Integer> a, Player b) {
+    @Override
+    public void startSheriff(final ArrayList<Integer> a, final Player b) {
         int c = calculateCost(a, b.getDeclared());
         removeIllegal(a, b.getDeclared());
-        this.setScore(this.getScore()+c);
-        System.out.println("sunt BASIC Am primit " + c + "aur ca serif si am acum: " + getScore());
-        b.setScore(b.getScore()-c);
+        this.setScore(this.getScore() + c);
+        b.setScore(b.getScore() - c);
     }
 
-    public void addTaraba(ArrayList<Integer> a) {
-        for (int i = 0; i<a.size(); i++) {
-            this.taraba.add(a.get(i));
-        }
+    public void addTable(final ArrayList<Integer> a) {
+        this.taraba.addAll(a);
     }
 
-    public ArrayList<Integer> getTaraba() {
+    public ArrayList<Integer> getTable() {
         return this.taraba;
     }
 
-
     @Override
-    public void addIllegalBonusCard(int n) {
+    public void addIllegalBonusCard(final int n) {
         this.taraba.add(n);
     }
 

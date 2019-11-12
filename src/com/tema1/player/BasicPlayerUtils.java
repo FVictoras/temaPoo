@@ -1,9 +1,15 @@
 package com.tema1.player;
 
+import com.tema1.common.Constants;
+
 import java.util.ArrayList;
 
-public class BasicPlayerUtils {
-    public static ArrayList<Integer> basicPocket(ArrayList<Integer> a) {
+final class BasicPlayerUtils {
+
+    private BasicPlayerUtils() {
+    }
+
+    static ArrayList<Integer> basicPocket(final ArrayList<Integer> a) {
         ArrayList<Integer> aux = new ArrayList<Integer>();
         ArrayList<Integer> pocket = new ArrayList<Integer>();
         // Cazul toate ilegale, il alege pe cel mai profitabil.
@@ -14,7 +20,7 @@ public class BasicPlayerUtils {
         } else {
             // Daca exista cel putin o carte legala toate celelalte nu sunt luate in considerare
             for (int i = 0; i < a.size(); i++) {
-                if (a.get(i) < 10) {
+                if (a.get(i) < Constants.END_LEGAL) {
                     aux.add(a.get(i));
                 }
             }

@@ -27,12 +27,14 @@ public class GameInput {
     public final ArrayList<String> getPlayerNames() {
         return mPlayersOrder;
     }
-    
+
     public final int getRounds() {
-    	return mRounds;
+        return mRounds;
     }
 
-    public final int getTotalPlayers() { return mPlayersOrder.size(); }
+    public final int getTotalPlayers() {
+        return mPlayersOrder.size();
+    }
 
     public final boolean isValidInput() {
         boolean membersInstantiated = mAssetOrder != null && mPlayersOrder != null;

@@ -1,5 +1,6 @@
 package com.tema1.main;
 
+import com.tema1.common.Constants;
 import com.tema1.goods.Goods;
 import com.tema1.goods.GoodsFactory;
 import com.tema1.goods.IllegalGoods;
@@ -8,40 +9,26 @@ import com.tema1.player.Player;
 import com.tema1.player.PlayerUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-public class Bonus {
-    static GoodsFactory Singletone = GoodsFactory.getInstance();
-    static ArrayList<Player> myPlayers;
-    static Map<Integer, Player> map = new HashMap<Integer, Player>();
+final class Bonus {
+    private static GoodsFactory myFactory = GoodsFactory.getInstance();
 
-    public static int getRecurente(ArrayList<Integer> a, int n) {
-        int k = 0;
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i) == n) {
-                k++;
-            }
-        }
-        return k;
+    private Bonus() {
     }
 
-    public static void bonusIllegal(ArrayList<Player> p) {
-        for (int i = 0; i < p.size(); i++) {
-            if (p.get(i).getTaraba().size() > 0) {
-                if (PlayerUtils.allLegal(p.get(i).getTaraba()) == false) {
-                    for (int j = 0; j < p.get(i).getTaraba().size(); j++) {
-                        if (p.get(i).getTaraba().get(j) > 10) {
-                            IllegalGoods igood = (IllegalGoods) Singletone.getGoodsById(p.get(i).getTaraba().get(j));
-//                            Map.Entry<Goods, Integer> entry = igood.getIllegalBonus().entrySet().iterator().next();
-                            Iterator<Map.Entry<Goods, Integer>> itr = igood.getIllegalBonus().entrySet().iterator();
-                            while (itr.hasNext()) {
-                                Map.Entry<Goods, Integer> entry = itr.next();
+    static void bonusIllegal(final ArrayList<Player> p) {
+        for (Player player : p) {
+            if (player.getTable().size() > 0) {
+                if (!PlayerUtils.allLegal(player.getTable())) {
+                    for (int j = 0; j < player.getTable().size(); j++) {
+                        if (player.getTable().get(j) > Constants.END_LEGAL) {
+                            IllegalGoods igood = (IllegalGoods) myFactory.getGoodsById(player.getTable().get(j));
+                            for (Map.Entry<Goods, Integer> entry : igood.getIllegalBonus().entrySet()) {
                                 Goods key = entry.getKey();
                                 int value = entry.getValue();
                                 for (int k = 0; k < value; k++) {
-                                    p.get(i).addIllegalBonusCard(key.getId());
+                                    player.addIllegalBonusCard(key.getId());
                                 }
                             }
                         }
@@ -52,48 +39,43 @@ public class Bonus {
 
     }
 
-
-    public static void bonusKingAndQueen(ArrayList<Player> p) {
-        GoodsFactory Singletone = GoodsFactory.getInstance();
-        int[][] table = new int[10][p.size()];
+    static void bonusKingAndQueen(final ArrayList<Player> p) {
+        int[][] table = new int[Constants.END_LEGAL][p.size()];
         for (int i = 0; i < p.size(); i++) {
-//            myPlayers.add(p.get(i));
-            if (p.get(i).getTaraba().size() > 0) {
-                for (int j = 0; j < p.get(i).getTaraba().size(); j++) {
-                    if (p.get(i).getTaraba().get(j) < 10)
-                        table[p.get(i).getTaraba().get(j)][i]++;
+            if (p.get(i).getTable().size() > 0) {
+                for (int j = 0; j < p.get(i).getTable().size(); j++) {
+                    if (p.get(i).getTable().get(j) < Constants.END_LEGAL) {
+                        table[p.get(i).getTable().get(j)][i]++;
+                    }
                 }
             }
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < Constants.END_LEGAL; i++) {
 
             int first = 0;
             int second = 0;
-            int first_id = -1;
-            int second_id = -1;
+            int firstId = -1;
+            int secondId = -1;
             for (int j = 0; j < p.size(); j++) {
                 if (table[i][j] > first) {
                     second = first;
-                    second_id = first_id;
+                    secondId = firstId;
                     first = table[i][j];
-                    first_id = j;
+                    firstId = j;
                 } else if (table[i][j] > second) {
                     second = table[i][j];
-                    second_id = j;
+                    secondId = j;
                 }
             }
-            LegalGoods good = (LegalGoods) Singletone.getGoodsById(i);
-            if (first_id != -1) {
-                p.get(first_id).setScore(p.get(first_id).getScore() + good.getKingBonus());
+            LegalGoods good = (LegalGoods) myFactory.getGoodsById(i);
+            if (firstId != -1) {
+                p.get(firstId).setScore(p.get(firstId).getScore() + good.getKingBonus());
             }
-            if (second_id != -1) {
-                p.get(second_id).setScore(p.get(second_id).getScore() + good.getQueenBonus());
+            if (secondId != -1) {
+                p.get(secondId).setScore(p.get(secondId).getScore() + good.getQueenBonus());
             }
         }
 
 
     }
-
-
-    // todo de implementat
 }

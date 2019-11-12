@@ -4,8 +4,7 @@ import fileio.FileSystem;
 
 import java.util.ArrayList;
 
-public class GameInputLoader {
-	// DO NOT MODIFY
+public final class GameInputLoader {
 	private final String mInputPath;
 	private final String mOutputPath;
 
@@ -20,23 +19,25 @@ public class GameInputLoader {
         int rounds = 0;
         int noPlayers = 0;
         int noGoods = 0;
-        
-    	try {
+
+        try {
 			FileSystem fs = new FileSystem(mInputPath, mOutputPath);
 
 			rounds = fs.nextInt();
 			noPlayers = fs.nextInt();
-			
-			for(int i = 0; i < noPlayers; ++i)
+
+            for (int i = 0; i < noPlayers; ++i) {
 				playerOrder.add(fs.nextWord());
-			
+            }
+
 			noGoods = fs.nextInt();
-		
-			for(int i = 0; i < noGoods; ++i)
+
+            for (int i = 0; i < noGoods; ++i) {
 				assetsIds.add(fs.nextInt());
-			
+            }
+
 			fs.close();
-			
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
